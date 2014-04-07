@@ -1,0 +1,27 @@
+<INST_TEST>
+<delay>2</delay>
+<TESTS>
+	<TEST>
+		<pv pvnum="1">NDW1032:kvlb23:CS:IOC:INSTETC_01:DEVIOS:TOD</pv>
+		<test-type>Caget-Datim</test-type>
+		<expval>TOD</expval>
+		<scope>caget;basic Epics</scope>
+		<data-format>%m/%d/%Y %H:%M:%S</data-format>
+		<data-type>datim</data-type>
+		<pvstouse>1</pvstouse></TEST>
+	<TEST>
+		<pv pvnum="1">NDW1032:kvlb23:CS:IOC:INSTETC_01:DEVIOS:TOD.PROC</pv>
+		<test-type>Caput-Zero</test-type>
+		<scope>caput;basic EPICS</scope>
+		<pvstouse>1</pvstouse>
+		<expval>0</expval></TEST>
+	<TEST>
+		<pv pvnum="1">NDW1032:kvlb23:CS:IOC:INSTETC_01:DEVIOS:HEARTBEAT</pv>
+		<test-type>Camonitor-Int</test-type>
+		<scope>camonitor;basic EPICS</scope>
+		<pvstouse>1</pvstouse></TEST>
+	<TEST>
+		<pv pvnum="1">ISISBEAM:HEARTBEAT</pv>
+		<test-type>Camonitor-Int</test-type>
+		<scope>camonitor;basic EPICS;network</scope>
+		<pvstouse>1</pvstouse></TEST></TESTS></INST_TEST>
