@@ -1,3 +1,7 @@
+'''
+The umberella code to deal with the TEST xml and call the build test code as appropriate
+'''
+
 from __future__ import print_function
 from epics import PV
 from CagetDatim import Caget_Datim
@@ -9,17 +13,22 @@ import unittest
 import xml.etree.ElementTree as etree
 import os
 
+#instrument_test is the main test code
 def instrument_test(kwargs):
+    #Set the default directory to the local directory for the file - this may need to change
     dir = os.path.dirname(__file__)
+    #If a specific set of 'tests' has been specified use that file, otherwise use the default one
     try:
         test_desc = kwargs['tests']
     except:
         test_desc = os.path.join(dir,'TEST.xml')
+    #Set the debug variable to a value passed in, or default to not debugging
     try:
         debug = kwargs['debug']
     except:
         debug = 0
     set_debug(debug)
+    #Set the gen_log variable to a value passed in, or default to logging
     try:
         gen_log = kwargs['gen_log']
     except:
@@ -33,6 +42,7 @@ def instrument_test(kwargs):
     testdir = tree.findtext('test_directory')
     if testdir == None:
         testdir = os.path.join(os.environ['ICPVARDIR'],'logs/testlog')
+	print('testdir = %s'%testdir)
     #Set a delay variable, hopefully this will allow for creating an unstable test environment at times
     node = tree.find('delay')
     try:
@@ -138,16 +148,19 @@ def instrument_test(kwargs):
     print_info('Tests Complete.')
     if gen_log == 1:
         print_info('Generating Log File.')
-        pass_state = GenerateLog(testdir,log_file,TESTS,testdets)
+    pass_state = GenerateLog(testdir,log_file,TESTS,testdets,gen_log)
     return pass_state
 
+#inst_test is for use as an external command to allow for the _msgs version to add a kwarg
 def inst_test(**kwargs):
     return instrument_test(kwargs)
 
+#inst_test_msgs is an external command which forces the addition of debug = 1 so that info is displayed
 def inst_test_msgs(**kwargs):
     kwargs['debug']=1
     return instrument_test(kwargs)
 
+#main here so that the system can be tested in debug mode (or not if code is altered) and outcome is displayed
 def main():
     pass_state = inst_test(debug = 1)
     print('Pass State = %s'%pass_state)

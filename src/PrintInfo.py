@@ -1,3 +1,8 @@
+'''
+This block can be used to print information to the screen or not, as the case may be
+It is basically a wrapper, with the debug set at one point only
+'''
+
 from __future__ import print_function
 
 class display_info:

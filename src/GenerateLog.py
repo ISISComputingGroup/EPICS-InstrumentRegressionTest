@@ -1,15 +1,22 @@
+'''
+This will take the information from the tests, and the log file generated during testing
+and turn it into a more readable system to be stored in the appropriate logs folder
+It also counts the tests and passes, and determines the main success/fail
+'''
+
 from __future__ import print_function
 from PrintInfo import *
 import os
 import time
 
-def GenerateLog(testdir,log_file,TESTS,testdets):	
+def GenerateLog(testdir,log_file,TESTS,testdets,gen_log):	
 	#Edit the log file and store in a seperate file - this may require some alterations
-	hostname = os.environ['COMPUTERNAME']
-	log_time = time.strftime('%Y-%m-%d %H-%M-%S', time.gmtime())
-	edited_log_name = ('%s %s Test Log.txt' % (log_time,hostname))
-	edited_log = os.path.join(testdir,edited_log_name)
-	loged = open(edited_log, 'w')
+	if gen_log == 1:
+		hostname = os.environ['COMPUTERNAME']
+		log_time = time.strftime('%Y-%m-%d %H-%M-%S', time.gmtime())
+		edited_log_name = ('%s %s Test Log.txt' % (log_time,hostname))
+		edited_log = os.path.join(testdir,edited_log_name)
+		loged = open(edited_log, 'w')
 	all_res = []
 	res = []
 	with open(log_file, 'r') as f:
@@ -54,16 +61,18 @@ def GenerateLog(testdir,log_file,TESTS,testdets):
 	        curr_entry = curr_entry + ':\t' + outcome
 	red_res.append(curr_entry)
 	
+	number_of_fails = number_of_tests - number_of_passes
+	print_info('%s test(s) undertaken\n%s Passed, %s Failed\n'%(number_of_tests,number_of_passes,number_of_fails))
+	if gen_log == 1:
+		loged.write('%s test(s) undertaken\n%s Passed, %s Failed\n'%(number_of_tests,number_of_passes,number_of_fails))
+		loged.writelines(red_res)
+		loged.close()
+	
+	#Determine whether or not the overall testlist was a pass or fail
 	pass_state = 'UNKNOWN'
 	if number_of_tests == number_of_passes:
 		pass_state = 'PASS'
 	else:
 		pass_state = 'FAIL'
-	
-	number_of_fails = number_of_tests - number_of_passes
-	loged.write('%s test(s) undertaken\n%s Passed, %s Failed\n'%(number_of_tests,number_of_passes,number_of_fails))
-	print_info('%s test(s) undertaken\n%s Passed, %s Failed\n'%(number_of_tests,number_of_passes,number_of_fails))
-	loged.writelines(red_res)
-	loged.close()
 	
 	return pass_state

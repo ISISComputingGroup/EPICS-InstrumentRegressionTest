@@ -1,3 +1,9 @@
+'''
+Initially this is just a simple check for a specific DATIM type
+In the future this can be altered without changing the rest of the modules,
+e.g. could check for a constant date, or a different pv
+'''
+
 from epics import PV
 import unittest
 import time
