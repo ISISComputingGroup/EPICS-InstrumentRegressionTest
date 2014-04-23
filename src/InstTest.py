@@ -42,7 +42,6 @@ def instrument_test(kwargs):
     testdir = tree.findtext('test_directory')
     if testdir == None:
         testdir = os.path.join(os.environ['ICPVARDIR'],'logs/testlog')
-	print('testdir = %s'%testdir)
     #Set a delay variable, hopefully this will allow for creating an unstable test environment at times
     node = tree.find('delay')
     try:
