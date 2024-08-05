@@ -5,6 +5,7 @@ It is basically a wrapper, with the debug set at one point only
 
 from __future__ import print_function
 
+
 class display_info:
     debug = 0
     def set_debug(self,todebug):

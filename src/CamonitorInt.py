@@ -2,9 +2,10 @@
 Simple check for specific test, it can be altered and extended as appropriate in the future
 '''
 
-from epics import *
-import unittest
 import time
+
+from epics import *
+
 
 class keeptrack:
     list=[]

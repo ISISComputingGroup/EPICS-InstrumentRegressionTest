@@ -3,15 +3,18 @@ The umberella code to deal with the TEST xml and call the build test code as app
 '''
 
 from __future__ import print_function
-from epics import PV
-from CagetDatim import Caget_Datim
-from CaputZero import Caput_Zero
-from CamonitorInt import Camonitor_Int
-from GenerateLog import GenerateLog
-from PrintInfo import *
+
+import os
 import unittest
 import xml.etree.ElementTree as etree
-import os
+
+from CagetDatim import Caget_Datim
+from CamonitorInt import Camonitor_Int
+from CaputZero import Caput_Zero
+from epics import PV
+from GenerateLog import GenerateLog
+from PrintInfo import *
+
 
 #instrument_test is the main test code
 def instrument_test(kwargs):

@@ -2,9 +2,8 @@
 Simple check for specific test, it can be altered and extended as appropriate in the future
 '''
 
-from epics import PV
-import unittest
 import time
+
 
 def Caput_Zero(test,**kwargs):
     PVLIST = kwargs['actualpvs']

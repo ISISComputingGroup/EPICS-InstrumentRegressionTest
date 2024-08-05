@@ -5,9 +5,12 @@ It also counts the tests and passes, and determines the main success/fail
 '''
 
 from __future__ import print_function
-from PrintInfo import *
+
 import os
 import time
+
+from PrintInfo import *
+
 
 def GenerateLog(testdir,log_file,TESTS,testdets,gen_log):	
 	#Edit the log file and store in a seperate file - this may require some alterations

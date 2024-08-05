@@ -4,9 +4,8 @@ In the future this can be altered without changing the rest of the modules,
 e.g. could check for a constant date, or a different pv
 '''
 
-from epics import PV
-import unittest
 import time
+
 
 def Caget_Datim(test,**kwargs):
     PVLIST = kwargs['actualpvs']
