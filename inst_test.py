@@ -1,6 +1,6 @@
-'''
+"""
 Python command to allow for using inst_test with arguments from command line, or using default TEST.xml
-'''
+"""
 
 import sys
 
